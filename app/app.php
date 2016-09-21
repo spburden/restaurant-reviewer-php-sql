@@ -38,7 +38,7 @@
     });
 
     $app->post("/cuisine/{id}", function($id) use ($app) {
-        $new_restaurant = new Restaurant($restaurant_id = null, $_POST['new_name'], $_POST['new_address'], $_POST['new_phone'], $_POST['cuisine_id']);
+        $new_restaurant = new Restaurant($restaurant_id = null, $_POST['new_name'], $_POST['new_address'], $_POST['new_phone'], $_POST['cuisine_id'], $_POST['new_picture']);
         $new_restaurant->save();
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.html.twig', array ('cuisine' => $cuisine, 'restaurants' => $cuisine->findRestaurants()));

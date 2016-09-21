@@ -8,6 +8,7 @@
         <h1>Restaurant Reviewer</h1>
         <h2>{{ restaurant.getName }}</h2>
         <h4>{{ cuisine.getName }}</h4>
+        <img src='{{ restaurant.getPicture }}'>
         <h3>{% if restaurant.getRating == 0 %}
             No Ratings Yet
         {% else %}

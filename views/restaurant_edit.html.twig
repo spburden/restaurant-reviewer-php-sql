@@ -15,6 +15,8 @@
             <input type="text" name="edit_address" value='{{ restaurant.getAddress }}'>
             <label for="edit_phone">Phone Number</label>
             <input type="text" name="edit_phone" value='{{ restaurant.getPhone }}'>
+            <label for="edit_picture">Image URL</label>
+            <input type="text" name="edit_picture" value='{{ restaurant.getPicture }}'>
             <input type="hidden" name="edit_cuisine_id" value="{{ cuisine.getId }}">
             <button type="submit" name="button">Edit</button>
         </form>
