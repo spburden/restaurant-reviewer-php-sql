@@ -6,15 +6,19 @@
         private $address;
         private $phone;
         private $cuisine_id;
+        private $total_rating;
+        private $rating_count;
 
 
-        function __construct ($id = null, $name, $address, $phone, $cuisine_id)
+        function __construct ($id = null, $name, $address, $phone, $cuisine_id, $total_rating = 0, $rating_count = 0)
         {
             $this->id = $id;
             $this->name = $name;
             $this->address = $address;
             $this->phone = $phone;
             $this->cuisine_id = $cuisine_id;
+            $this->total_rating = $total_rating;
+            $this->rating_count = $rating_count;
         }
 
         function getId()
@@ -62,9 +66,52 @@
             return $this->cuisine_id;
         }
 
+        function setTotalRating($new_total_rating)
+        {
+            $this->total_rating = $new_total_rating;
+        }
+
+        function getTotalRating()
+        {
+            return $this->total_rating;
+        }
+
+        function setRatingCount($new_rating_count)
+        {
+            $this->rating_count = $new_rating_count;
+        }
+
+        function getRatingCount()
+        {
+            return $this->rating_count;
+        }
+
+        function getRating()
+        {
+            $total = $this->getTotalRating();
+            $count = $this->getRatingCount();
+            if ($count != 0) {
+                $average_rating = number_format(($total)/($count), 1);
+            } else {
+                $average_rating = 0;
+            }
+            return $average_rating;
+        }
+
+        function updateRating($new_rating)
+        {
+            $total = $this->getTotalRating();
+            $count = $this->getRatingCount();
+            $total += $new_rating;
+            $count += 1;
+            $GLOBALS['DB']->exec("UPDATE restaurants SET total_rating = {$total}, rating_count = {$count};");
+            $this->setTotalRating($total);
+            $this->setRatingCount($count);
+        }
+
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, address, phone, cuisine_id) VALUES ('{$this->getName()}','{$this->getAddress()}','{$this->getPhone()}',{$this->getCuisineId()});");
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, address, phone, cuisine_id, total_rating, rating_count) VALUES ('{$this->getName()}','{$this->getAddress()}','{$this->getPhone()}',{$this->getCuisineId()}, {$this->getTotalRating()}, {$this->getRatingCount()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -78,7 +125,9 @@
                 $address = $restaurant['address'];
                 $phone = $restaurant['phone'];
                 $cuisine_id = $restaurant['cuisine_id'];
-                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id);
+                $total_rating = $restaurant['total_rating'];
+                $rating_count = $restaurant['rating_count'];
+                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;

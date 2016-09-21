@@ -104,6 +104,51 @@
             $this->assertEquals($test_Restaurant, $output);
         }
 
+        function test_getRating()
+        {
+            //Arrange
+            $name = "Zaytoon";
+            $address = "Santa Barbara";
+            $phone = "805-398-2323";
+            $total_rating = 100;
+            $rating_count = 12;
+            $cuisine_id = 12;
+
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
+
+            $test_Restaurant->save();
+
+            //Act
+            $output = $test_Restaurant->getRating();
+
+            //Assert
+            $this->assertEquals(8.3, $output);
+        }
+
+        function test_updateRating()
+        {
+            //Arrange
+            $name = "Zaytoon";
+            $address = "Santa Barbara";
+            $phone = "805-398-2323";
+            $total_rating = 100;
+            $rating_count = 12;
+            $cuisine_id = 12;
+
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
+
+            $test_Restaurant->save();
+
+            //Act
+            $test_Restaurant->updateRating(5);
+            $output = $test_Restaurant->getRating();
+
+            //Assert
+            $this->assertEquals(8.1, $output);
+        }
+
+
+
 
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests

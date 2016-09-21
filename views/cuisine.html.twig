@@ -23,7 +23,12 @@
                 <h2>Select a Restaurant</h2>
                 <ul>
                     {% for restaurant in restaurants %}
-                        <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} </li></a>
+                        <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} -
+                            {% if restaurant.getRating == 0 %}
+                                No Ratings Yet
+                            {% else %}
+                                Rating: {{ restaurant.getRating }}</li></a>
+                            {% endif %}
                     {% endfor %}
                 </ul>
             {% endif %}

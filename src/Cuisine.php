@@ -74,7 +74,9 @@
                 $address = $restaurant['address'];
                 $phone = $restaurant['phone'];
                 $cuisine_id = $restaurant['cuisine_id'];
-                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id);
+                $total_rating = $restaurant['total_rating'];
+                $rating_count = $restaurant['rating_count'];
+                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
