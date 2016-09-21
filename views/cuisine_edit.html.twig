@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Relp 2.0 Cuisines</title>
+    </head>
+    <body>
+        <h1>Restaurant Reviewer</h1>
+        <h2>Edit {{ cuisine.getName }}</h2>
+        <form class="" action="/cuisine/{{ cuisine.getId }}/edit" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <label for="">Cuisine Name</label>
+            <input type="text" name="edit_name" value="{{ cuisine.getName }}">
+            <button type="submit" name="button">Edit</button>
+        </form>
+        {% if error == 'error' %}
+            <h3>That cuisine name already exists!</h3>
+        {% endif %}
+
+        <a href="/">Home</a>
+        <form class="" action="/cuisine/{{ cuisine.getId }}/delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete</button>
+        </form>
+
+    </body>
+</html>

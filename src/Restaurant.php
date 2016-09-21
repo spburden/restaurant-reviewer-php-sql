@@ -111,6 +111,12 @@
             $this->setCuisineId($edit_cuisine_id);
         }
 
+        function deleteRestaurant()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+        }
+
+
 
 
 

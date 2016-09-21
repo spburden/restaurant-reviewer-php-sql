@@ -93,6 +93,29 @@
             return $found_cuisine;
         }
 
+        function deleteCuisine()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
+        }
+
+        function updateCuisine($edit_name)
+        {
+            $found_cuisine = null;
+            $cuisines = Cuisine::getAll();
+            foreach($cuisines as $cuisine) {
+                $cuisine_name = $cuisine->getName();
+                if (strtolower($cuisine_name) == strtolower($edit_name)) {
+                    $found_cuisine = $cuisine;
+                    return 'error';
+                }
+            }
+            if ($found_cuisine == null) {
+                $edit_name = ucwords(strtolower($edit_name));
+                $GLOBALS['DB']->exec("UPDATE cuisines SET name = '{$edit_name}' WHERE id = {$this->getId()};");
+                $this->setName($edit_name);
+            }
+        }
 
     }
 ?>

@@ -20,5 +20,10 @@
         </form>
         <a href="/">Home</a>
         <a href='/restaurant/{{ restaurant.getId }}'>Back</a>
+        <form class="" action="/restaurant/{{ restaurant.getId }}/delete" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete</button>
+        </form>
+
     </body>
 </html>
