@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Return</h1>
+
+        <form class="" action="/result" method="post">
+            <label for="">Enter :</label>
+            <input type="text" name="" required>
+            <button type="submit" name="button">Return</button>
+        </form>
+        <div class="result">
+            {% if result %}
+            <h2> This result is {{ result }}</h2>
+            {% endif %}
+            
+            {% for car in matchingCars %}
+                <li> {{ car.getModel }} </li>
+            {% endfor %}
+        </div>
+    </body>
+</html>
