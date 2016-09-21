@@ -18,6 +18,7 @@
         protected function tearDown()
         {
             Restaurant::deleteAll();
+            Cuisine::deleteAll();
         }
 
         function test_save()
@@ -61,7 +62,7 @@
             $output = Restaurant::getAll();
 
             //Assert
-            $this->assertEquals([$test_Restaurant1, $test_Restaurant2], $output);
+            $this->assertEquals([$test_Restaurant2, $test_Restaurant1], $output);
         }
 
         function test_deleteAll()
@@ -82,6 +83,27 @@
             //Assert
             $this->assertEquals([], $output);
         }
+
+        function test_find_restaurant()
+        {
+            //Arrange
+            $name = "Zaytoon";
+            $address = "Santa Barbara";
+            $phone = "805-398-2323";
+            $cuisine_id = 12;
+
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id);
+
+            $test_Restaurant->save();
+
+            //Act
+            $search_id = $test_Restaurant->getId();
+            $output = Restaurant::find($search_id);
+
+            //Assert
+            $this->assertEquals($test_Restaurant, $output);
+        }
+
 
     }
         // export PATH=$PATH:./vendor/bin first and then you will only have to run  $ phpunit tests
