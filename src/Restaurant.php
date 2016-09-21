@@ -104,7 +104,7 @@
             $count = $this->getRatingCount();
             $total += $new_rating;
             $count += 1;
-            $GLOBALS['DB']->exec("UPDATE restaurants SET total_rating = {$total}, rating_count = {$count};");
+            $GLOBALS['DB']->exec("UPDATE restaurants SET total_rating = {$total}, rating_count = {$count} WHERE id = {$this->getId()};");
             $this->setTotalRating($total);
             $this->setRatingCount($count);
         }
@@ -117,7 +117,8 @@
 
         static function getAll()
         {
-            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants ORDER BY name ASC;");
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants ORDER BY (total_rating)/(rating_count + 1) DESC;");
+
             $restaurants = array();
             foreach($returned_restaurants as $restaurant) {
                 $id = $restaurant['id'];

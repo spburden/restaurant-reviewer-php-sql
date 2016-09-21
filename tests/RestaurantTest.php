@@ -62,7 +62,7 @@
             $output = Restaurant::getAll();
 
             //Assert
-            $this->assertEquals([$test_Restaurant2, $test_Restaurant1], $output);
+            $this->assertEquals([$test_Restaurant1, $test_Restaurant2], $output);
         }
 
         function test_deleteAll()

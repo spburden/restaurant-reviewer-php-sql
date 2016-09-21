@@ -93,5 +93,12 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines));
     });
 
+    $app->post("/restaurant/{id}/update_rating", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $restaurant->updateRating($_POST['user_rating']);
+        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
+    });
+
     return $app;
 ?>
