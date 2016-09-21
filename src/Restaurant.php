@@ -102,6 +102,15 @@
             return $found_restaurant;
         }
 
+        function updateRestaurant($edit_name, $edit_address, $edit_phone, $edit_cuisine_id)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$edit_name}', address = '{$edit_address}', phone = '{$edit_phone}', cuisine_id = '{$edit_cuisine_id}' WHERE id = {$this->getId()};");
+            $this->setName($edit_name);
+            $this->setAddress($edit_address);
+            $this->setPhone($edit_phone);
+            $this->setCuisineId($edit_cuisine_id);
+        }
+
 
 
 

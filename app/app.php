@@ -50,5 +50,18 @@
         return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
     });
 
+    $app->get("/restaurant/{id}/edit", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        return $app['twig']->render('restaurant_edit.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
+    });
+
+    $app->post("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $restaurant->updateRestaurant($_POST['edit_name'], $_POST['edit_address'], $_POST['edit_phone'], $_POST['edit_cuisine_id']);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
+    });
+
     return $app;
 ?>

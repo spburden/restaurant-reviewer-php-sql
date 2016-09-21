@@ -11,8 +11,9 @@
 
         <p>Location: {{ restaurant.getAddress }}</p>
         <p>Phone Number: {{ restaurant.getPhone }}</p>
-        
+
         <a href="/">Home</a>
         <a href='/cuisine/{{ cuisine.getId }}'>Back</a>
+        <a href='/restaurant/{{ restaurant.getId }}/edit'>Edit Restaurant</a>
     </body>
 </html>
