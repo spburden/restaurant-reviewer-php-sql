@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Relp 2.0 Cuisines</title>
+    </head>
+    <body>
+        <h1>Restaurant Reviewer</h1>
+        <h2>{{ cuisine.getName }}</h2>
+        <form class="" action="/cuisine/{{ cuisine.getId }}" method="post">
+            <h3>Add a new Restaurant</h3>
+            <label for="new_name">Name</label>
+            <input type="text" name="new_name" required>
+            <label for="new_address">Location</label>
+            <input type="text" name="new_address">
+            <label for="new_phone">Phone Number</label>
+            <input type="text" name="new_phone">
+            <button type="submit" name="button">Add</button>
+            <input type="hidden" name="cuisine_id" value="{{ cuisine.getId }}">
+        </form>
+        <div class="restaurants">
+            {% if restaurants %}
+                <h2>Select a Restaurant</h2>
+                <ul>
+                    {% for restaurant in restaurants %}
+                        <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} </li></a>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <a href="/">Home</a>
+    </body>
+</html>

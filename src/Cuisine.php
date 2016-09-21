@@ -28,8 +28,22 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO cuisines (name) VALUES ('{$this->getName()}');");
-            $this->id = $GLOBALS['DB']->lastInsertId();
+            $found_cuisine = null;
+            $cuisines = Cuisine::getAll();
+            foreach($cuisines as $cuisine) {
+                $cuisine_name = $cuisine->getName();
+                if (strtolower($cuisine_name) == strtolower($this->getName())) {
+                    $found_cuisine = $cuisine;
+                    break;
+                }
+            }
+            if ($found_cuisine == null) {
+                $name = $this->getName();
+                $name = ucwords(strtolower($name));
+                $GLOBALS['DB']->exec("INSERT INTO cuisines (name) VALUES ('{$name}');");
+                $this->id = $GLOBALS['DB']->lastInsertId();
+            }
+
         }
 
         static function getAll()
