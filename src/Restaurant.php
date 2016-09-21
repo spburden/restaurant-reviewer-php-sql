@@ -6,17 +6,19 @@
         private $address;
         private $phone;
         private $cuisine_id;
+        private $picture;
         private $total_rating;
         private $rating_count;
 
 
-        function __construct ($id = null, $name, $address, $phone, $cuisine_id, $total_rating = 0, $rating_count = 0)
+        function __construct ($id = null, $name, $address, $phone, $cuisine_id, $picture = "", $total_rating = 0, $rating_count = 0)
         {
             $this->id = $id;
             $this->name = $name;
             $this->address = $address;
             $this->phone = $phone;
             $this->cuisine_id = $cuisine_id;
+            $this->picture = $picture;
             $this->total_rating = $total_rating;
             $this->rating_count = $rating_count;
         }
@@ -66,6 +68,16 @@
             return $this->cuisine_id;
         }
 
+        function setPicture($new_picture)
+        {
+            $this->picture = $new_picture;
+        }
+
+        function getPicture()
+        {
+            return $this->picture;
+        }
+
         function setTotalRating($new_total_rating)
         {
             $this->total_rating = $new_total_rating;
@@ -111,7 +123,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, address, phone, cuisine_id, total_rating, rating_count) VALUES ('{$this->getName()}','{$this->getAddress()}','{$this->getPhone()}',{$this->getCuisineId()}, {$this->getTotalRating()}, {$this->getRatingCount()});");
+            $GLOBALS['DB']->exec("INSERT INTO restaurants (name, address, phone, cuisine_id, picture, total_rating, rating_count) VALUES ('{$this->getName()}','{$this->getAddress()}','{$this->getPhone()}',{$this->getCuisineId()},'{$this->getPicture()}', {$this->getTotalRating()}, {$this->getRatingCount()});");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -126,9 +138,10 @@
                 $address = $restaurant['address'];
                 $phone = $restaurant['phone'];
                 $cuisine_id = $restaurant['cuisine_id'];
+                $picture = $restaurant['picture'];
                 $total_rating = $restaurant['total_rating'];
                 $rating_count = $restaurant['rating_count'];
-                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
+                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $picture, $total_rating, $rating_count);
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;

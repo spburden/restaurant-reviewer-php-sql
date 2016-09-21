@@ -28,8 +28,9 @@
             $address = "Santa Barbara";
             $phone = "805-398-2323";
             $cuisine_id = 12;
+            $picture = "imagejpeg";
 
-            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id);
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $picture);
 
             //Act
             $test_Restaurant->save();
@@ -110,11 +111,12 @@
             $name = "Zaytoon";
             $address = "Santa Barbara";
             $phone = "805-398-2323";
+            $picture = "";
             $total_rating = 100;
             $rating_count = 12;
             $cuisine_id = 12;
 
-            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $picture, $total_rating, $rating_count);
 
             $test_Restaurant->save();
 
@@ -131,11 +133,12 @@
             $name = "Zaytoon";
             $address = "Santa Barbara";
             $phone = "805-398-2323";
+            $picture = "";
             $total_rating = 100;
             $rating_count = 12;
             $cuisine_id = 12;
 
-            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $total_rating, $rating_count);
+            $test_Restaurant = new Restaurant($id = null, $name, $address, $phone, $cuisine_id, $picture, $total_rating, $rating_count);
 
             $test_Restaurant->save();
 
