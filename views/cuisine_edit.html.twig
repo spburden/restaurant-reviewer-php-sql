@@ -18,6 +18,7 @@
         {% endif %}
 
         <a href="/">Home</a>
+        <a href='/cuisine/{{ cuisine.getId }}'>Back</a>
         <form class="" action="/cuisine/{{ cuisine.getId }}/delete" method="post">
             <input type="hidden" name="_method" value="delete">
             <button type="submit">Delete</button>
