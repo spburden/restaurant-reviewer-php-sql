@@ -1,3 +1,7 @@
+body {
+    font-family: 'Bitter', serif;
+}
+
 ul {
     padding-left: 0;
 }
@@ -15,8 +19,6 @@ li {
 
 .title {
     margin-top: 120px;
-    /*background: white;
-    opacity: 0.6;*/
     padding: 20px;
     color: white;
     text-shadow: 1px 1px 5px black;
@@ -36,4 +38,9 @@ li {
 
 #restaurantInfo {
     text-align: center;
+}
+
+.topTen {
+    width: 60%;
+    margin: 0 auto;
 }

@@ -23,14 +23,18 @@
 
     $app->get("/", function() use ($app) {
         $cuisines = Cuisine::getAll();
-        return $app['twig']->render('index.html.twig', array ('cuisines' => $cuisines));
+        $topTen = Restaurant::getTopTen();
+        $most_popular = Restaurant::getMostPopular();
+        return $app['twig']->render('index.html.twig', array ('cuisines' => $cuisines, 'top_ten' => $topTen, 'most_popular' => $most_popular));
     });
 
     $app->post("/", function() use ($app) {
         $new_cuisine = new Cuisine($id = null, $_POST['new_cuisine']);
         $new_cuisine->save();
         $cuisines = Cuisine::getAll();
-        return $app['twig']->render('index.html.twig', array ('cuisines' => $cuisines));
+        $topTen = Restaurant::getTopTen();
+        $most_popular = Restaurant::getMostPopular();
+        return $app['twig']->render('index.html.twig', array ('cuisines' => $cuisines, 'top_ten' => $topTen, 'most_popular' => $most_popular));
     });
 
     $app->get("/cuisine/{id}", function($id) use ($app) {

@@ -39,22 +39,25 @@
                 </div>
               </div>
             </nav>
-            <h1>Restaurant Reviewer</h1>
             <h2>Search Results</h2>
             <div class="restaurants">
                 {% if restaurants %}
                     <ul>
                         {% for restaurant in restaurants %}
-                            {% if restaurant.getPicture != '' %}
-                                <img class='img-small' src='{{ restaurant.getPicture }}'>
+                        <li>
+                            <div class='well'>
+                            {% if restaurant.getPicture is not empty %}
+                                <a href="/restaurant/{{ restaurant.getId }}"><img class='img-small' src='{{ restaurant.getPicture }}'></a>
                             {% endif %}
-                            <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} -
+                            <a href="/restaurant/{{ restaurant.getId }}"> {{ restaurant.getName }} -
                                 {% if restaurant.getRating == 0 %}
                                     (No Ratings Yet)
                                 {% else %}
                                     Rating: {{ restaurant.getRating }} (Reviews: {{ restaurant.getRatingCount }})
                                 {% endif %}
-                            </li></a>
+                            </a>
+                            </div>
+                        </li>
                         {% endfor %}
                     </ul>
                 {% else %}

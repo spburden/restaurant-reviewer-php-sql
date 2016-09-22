@@ -147,6 +147,46 @@
             return $restaurants;
         }
 
+        static function getTopTen()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants ORDER BY (total_rating)/(rating_count + 1) DESC LIMIT 10;");
+
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $id = $restaurant['id'];
+                $name = $restaurant['name'];
+                $address = $restaurant['address'];
+                $phone = $restaurant['phone'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $picture = $restaurant['picture'];
+                $total_rating = $restaurant['total_rating'];
+                $rating_count = $restaurant['rating_count'];
+                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $picture, $total_rating, $rating_count);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
+        static function getMostPopular()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurants ORDER BY rating_count DESC LIMIT 10;");
+
+            $restaurants = array();
+            foreach($returned_restaurants as $restaurant) {
+                $id = $restaurant['id'];
+                $name = $restaurant['name'];
+                $address = $restaurant['address'];
+                $phone = $restaurant['phone'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $picture = $restaurant['picture'];
+                $total_rating = $restaurant['total_rating'];
+                $rating_count = $restaurant['rating_count'];
+                $new_restaurant = new Restaurant($id, $name, $address, $phone, $cuisine_id, $picture, $total_rating, $rating_count);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
         static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants;");
