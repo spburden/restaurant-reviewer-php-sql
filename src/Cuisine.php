@@ -1,4 +1,5 @@
 <?php
+    require_once 'src/Restaurant.php';
     class Cuisine
     {
         private $id;
@@ -99,7 +100,10 @@
         function deleteCuisine()
         {
             $GLOBALS['DB']->exec("DELETE FROM cuisines WHERE id = {$this->getId()};");
-            $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE cuisine_id = {$this->getId()};");
+            $restaurants = $this->findRestaurants();
+            foreach($restaurants as $restaurant) {
+                $restaurant->deleteRestaurant();
+            }
         }
 
         function updateCuisine($edit_name)

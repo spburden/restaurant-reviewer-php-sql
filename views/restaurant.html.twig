@@ -2,18 +2,21 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link href='../css/bootstrap.css' rel='stylesheet' type='text/css'>
+        <link href='../css/styles.css' rel='stylesheet' type='text/css'>
         <title>Relp 2.0</title>
     </head>
     <body>
         <h1>Restaurant Reviewer</h1>
         <h2>{{ restaurant.getName }}</h2>
         <h4>{{ cuisine.getName }}</h4>
-        <img src='{{ restaurant.getPicture }}'>
-        <h3>{% if restaurant.getRating == 0 %}
-            No Ratings Yet
+        <img class='img-main' src='{{ restaurant.getPicture }}'>
+        {% if restaurant.getRating == 0 %}
+            <h3>No Ratings Yet</h3>
         {% else %}
-            Rating: {{ restaurant.getRating }}
-        {% endif %}</h3>
+            <h3>Rating: {{ restaurant.getRating }}</h3>
+            <h4>Number of Reviews: {{ restaurant.getRatingCount }}</h4>
+        {% endif %}
         <form class="" action="/restaurant/{{ restaurant.getId }}/update_rating" method="post">
             <input type="hidden" name="_method" value="patch">
             <label>Rate {{ restaurant.getName }}:</label>

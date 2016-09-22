@@ -177,6 +177,7 @@
         function deleteRestaurant()
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM reviews WHERE restaurant_id = {$this->getId()};");
         }
 
 

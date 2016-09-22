@@ -7,6 +7,7 @@
 
     require_once "src/Restaurant.php";
     require_once "src/Cuisine.php";
+    require_once "src/Review.php";
 
     $server = 'mysql:host=localhost;dbname=restaurants_test';
     $username = 'root';
@@ -120,6 +121,40 @@
 
             //Assert
             $this->assertEquals($test_Cuisine1, $output);
+        }
+
+        function test_delete_cuisine()
+        {
+            //Arrange
+            $name1 = "Greek";
+            $test_Cuisine1 = new Cuisine($id = null, $name1);
+            $test_Cuisine1->save();
+
+            $name1 = "Zaytoon";
+            $address1 = "Santa Barbara";
+            $phone1 = "805-398-2323";
+            $cuisine_id = $test_Cuisine1->getId();
+            $test_Restaurant1 = new Restaurant($id = null, $name1, $address1, $phone1, $cuisine_id);
+            $test_Restaurant1->save();
+
+            $author = "Bob";
+            $description = "Very Good!";
+            $rating = 8;
+            $restaurant_id = $test_Restaurant1->getId();
+            $test_Review = new Review($id = null, $author, $description, $rating, $restaurant_id);
+            $test_Review->save();
+
+            //Act
+            $test_Cuisine1->deleteCuisine();
+
+            $cuisines = Cuisine::getAll();
+            $restaurants = Restaurant::getAll();
+            $reviews = Review::getAll();
+
+            $output = [$cuisines, $restaurants, $reviews];
+
+            //Assert
+            $this->assertEquals([[],[],[]], $output);
         }
 
 
