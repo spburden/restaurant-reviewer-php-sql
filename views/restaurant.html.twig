@@ -15,7 +15,7 @@
                 <h4>Number of Reviews: {{ restaurant.getRatingCount }}</h4>
             {% endif %}
             <form class="" action="/restaurant/{{ restaurant.getId }}/update_rating" method="post">
-                <input type="hidden" name="_method" value="patch">
+                <!-- <input type="hidden" name="_method" value="patch"> -->
                 <div class='form-group'>
                     <label>Rate {{ restaurant.getName }}:</label>
                     <label class="radio-inline">

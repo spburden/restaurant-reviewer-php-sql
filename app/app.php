@@ -100,7 +100,7 @@
         $restaurant = Restaurant::find($id);
         $cuisine = Cuisine::find($restaurant->getCuisineId());
         $restaurant->updateRating($_POST['user_rating']);
-        $new_review = new Review($id = null, $_POST['author'], $_POST['description'], $_POST['user_rating'], $id);
+        $new_review = new Review($id = null, $_POST['author'], $_POST['description'], $_POST['user_rating'], $restaurant->getId());
         $new_review->save();
         $reviews = $restaurant->findReviews();
         return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine, 'reviews' => $reviews));
