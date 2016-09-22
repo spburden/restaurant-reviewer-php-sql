@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__."/../vendor/autoload.php";
+    require_once __DIR__."/../src/Review.php";
     require_once __DIR__."/../src/Restaurant.php";
     require_once __DIR__."/../src/Cuisine.php";
     date_default_timezone_set('America/Los_Angeles');
@@ -44,32 +45,6 @@
         return $app['twig']->render('cuisine.html.twig', array ('cuisine' => $cuisine, 'restaurants' => $cuisine->findRestaurants()));
     });
 
-    $app->get("/restaurant/{id}", function($id) use ($app) {
-        $restaurant = Restaurant::find($id);
-        $cuisine = Cuisine::find($restaurant->getCuisineId());
-        return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
-    });
-
-    $app->get("/restaurant/{id}/edit", function($id) use ($app) {
-        $restaurant = Restaurant::find($id);
-        $cuisine = Cuisine::find($restaurant->getCuisineId());
-        return $app['twig']->render('restaurant_edit.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
-    });
-
-    $app->post("/restaurant/{id}", function($id) use ($app) {
-        $restaurant = Restaurant::find($id);
-        $restaurant->updateRestaurant($_POST['edit_name'], $_POST['edit_address'], $_POST['edit_phone'], $_POST['edit_cuisine_id']);
-        $cuisine = Cuisine::find($restaurant->getCuisineId());
-        return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
-    });
-
-    $app->post("/restaurant/{id}/delete", function($id) use ($app) {
-        $restaurant = Restaurant::find($id);
-        $cuisine = Cuisine::find($restaurant->getCuisineId());
-        $restaurant->deleteRestaurant();
-        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->findRestaurants()));
-    });
-
     $app->get("/cuisine/{id}/edit", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $error = '';
@@ -93,11 +68,42 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => $cuisines));
     });
 
+    $app->get("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $reviews = $restaurant->findReviews();
+        return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine, 'reviews' => $reviews));
+    });
+
+    $app->post("/restaurant/{id}", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $restaurant->updateRestaurant($_POST['edit_name'], $_POST['edit_address'], $_POST['edit_phone'], $_POST['edit_cuisine_id'], $_POST['edit_picture']);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $reviews = $restaurant->findReviews();
+        return $app['twig']->render('restaurant.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine, 'reviews' => $reviews));
+    });
+
+    $app->get("/restaurant/{id}/edit", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        return $app['twig']->render('restaurant_edit.html.twig', array ('restaurant' => $restaurant, 'cuisine' => $cuisine));
+    });
+
+    $app->post("/restaurant/{id}/delete", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        $cuisine = Cuisine::find($restaurant->getCuisineId());
+        $restaurant->deleteRestaurant();
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->findRestaurants()));
+    });
+
     $app->post("/restaurant/{id}/update_rating", function($id) use ($app) {
         $restaurant = Restaurant::find($id);
         $cuisine = Cuisine::find($restaurant->getCuisineId());
         $restaurant->updateRating($_POST['user_rating']);
-        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine));
+        $new_review = new Review($id = null, $_POST['author'], $_POST['description'], $_POST['user_rating'], $id);
+        $new_review->save();
+        $reviews = $restaurant->findReviews();
+        return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine, 'reviews' => $reviews));
     });
 
     return $app;

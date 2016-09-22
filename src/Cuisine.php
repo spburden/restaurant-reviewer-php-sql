@@ -1,5 +1,4 @@
 <?php
-    require_once 'src/Restaurant.php';
     class Cuisine
     {
         private $id;

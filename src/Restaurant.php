@@ -165,7 +165,7 @@
             return $found_restaurant;
         }
 
-        function updateRestaurant($edit_name, $edit_address, $edit_phone, $edit_cuisine_id, $edit_cuisine_id)
+        function updateRestaurant($edit_name, $edit_address, $edit_phone, $edit_cuisine_id, $edit_picture)
         {
             $GLOBALS['DB']->exec("UPDATE restaurants SET name = '{$edit_name}', address = '{$edit_address}', phone = '{$edit_phone}', cuisine_id = '{$edit_cuisine_id}', picture = '{$edit_picture}' WHERE id = {$this->getId()};");
             $this->setName($edit_name);
@@ -178,6 +178,23 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurants WHERE id = {$this->getId()};");
             $GLOBALS['DB']->exec("DELETE FROM reviews WHERE restaurant_id = {$this->getId()};");
+        }
+
+        function findReviews()
+        {
+            $returned_reviews = $GLOBALS['DB']->query("SELECT * FROM reviews WHERE restaurant_id = {$this->getId()} ORDER BY id DESC;");
+
+            $reviews = array();
+            foreach($returned_reviews as $review) {
+                $id = $review['id'];
+                $author = $review['author'];
+                $description = $review['description'];
+                $rating = $review['rating'];
+                $restaurant_id = $review['restaurant_id'];
+                $new_review = new Review($id, $author, $description, $rating, $restaurant_id);
+                array_push($reviews, $new_review);
+            }
+            return $reviews;
         }
 
 

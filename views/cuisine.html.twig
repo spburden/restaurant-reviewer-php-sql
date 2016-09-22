@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link href='../css/bootstrap.css' rel='stylesheet' type='text/css'>
-        <link href='../css/styles.css' rel='stylesheet' type='text/css'>
-        <title>Relp 2.0 Cuisines</title>
-    </head>
     <body>
-        <h1>Restaurant Reviewer</h1>
-        <h2>{{ cuisine.getName }}</h2>
-        <form class="" action="/cuisine/{{ cuisine.getId }}" method="post">
-            <h3>Add a new Restaurant</h3>
-            <label for="new_name">Name</label>
-            <input type="text" name="new_name" required>
-            <label for="new_address">Location</label>
-            <input type="text" name="new_address">
-            <label for="new_phone">Phone Number</label>
-            <input type="text" name="new_phone">
-            <label for="new_picture">Image URL</label>
-            <input type="text" name="new_picture">
-            <input type="hidden" name="cuisine_id" value="{{ cuisine.getId }}">
-            <button type="submit" name="button">Add</button>
-        </form>
-        <div class="restaurants">
-            {% if restaurants %}
-                <h2>Select a Restaurant</h2>
-                <ul>
-                    {% for restaurant in restaurants %}
-                        <img class='img-small' src='{{ restaurant.getPicture }}'>
-                        <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} -
-                            {% if restaurant.getRating == 0 %}
-                                No Ratings Yet
-                            {% else %}
-                                Rating: {{ restaurant.getRating }}
+        <div class='container'>
+            <h1>Restaurant Reviewer</h1>
+            <h2>{{ cuisine.getName }}</h2>
+            <form class="" action="/cuisine/{{ cuisine.getId }}" method="post">
+                <h3>Add a new Restaurant</h3>
+                <label for="new_name">Name</label>
+                <input type="text" name="new_name" required>
+                <label for="new_address">Location</label>
+                <input type="text" name="new_address">
+                <label for="new_phone">Phone Number</label>
+                <input type="text" name="new_phone">
+                <label for="new_picture">Image URL</label>
+                <input type="text" name="new_picture">
+                <input type="hidden" name="cuisine_id" value="{{ cuisine.getId }}">
+                <button type="submit" name="button">Add</button>
+            </form>
+            <div class="restaurants">
+                {% if restaurants %}
+                    <h2>Select a Restaurant</h2>
+                    <ul>
+                        {% for restaurant in restaurants %}
+                            {% if restaurant.getPicture != '' %}
+                                <img class='img-small' src='{{ restaurant.getPicture }}'>
                             {% endif %}
-                        </li></a>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                            <a href="/restaurant/{{ restaurant.getId }}"><li> {{ restaurant.getName }} -
+                                {% if restaurant.getRating == 0 %}
+                                    No Ratings Yet
+                                {% else %}
+                                    Rating: {{ restaurant.getRating }} ({{ restaurant.getRatingCount }} reviews)
+                                {% endif %}
+                            </li></a>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            <a href="/">Home</a>
+            <a href="/cuisine/{{ cuisine.getId }}/edit">Edit</a>
         </div>
-        <a href="/">Home</a>
-        <a href="/cuisine/{{ cuisine.getId }}/edit">Edit</a>
     </body>
 </html>

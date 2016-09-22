@@ -71,11 +71,10 @@
             $description = "Very Good!";
             $rating = 8;
             $restaurant_id = 12;
-
             $test_Review = new Review($id = null, $author, $description, $rating, $restaurant_id);
+            $test_Review->save();
 
             //Act
-            $test_Review->save();
             Review::deleteAll();
             $output = Review::getAll();
 
