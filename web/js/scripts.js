@@ -1,5 +1,5 @@
 $(function() {
-    $('#slider').on("change", function() {
+    $('#slider').on("mousemove", function() {
         $('#sliderValue').html($('#slider').val());
     });
 });

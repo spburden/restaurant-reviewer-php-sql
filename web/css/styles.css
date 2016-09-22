@@ -44,3 +44,7 @@ li {
     width: 60%;
     margin: 0 auto;
 }
+
+.dropdown-menu {
+    width: 200px;
+}

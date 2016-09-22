@@ -33,7 +33,14 @@
                               <li><a href="/cuisine/{{ cuisine.getId }}"> {{ cuisine.getName }}</a></li>
                           {% endfor %}
                         <li role="separator" class="divider"></li>
-                        <li><a href="/">Add a new cuisine</a></li>
+                        <li><form action="/" method="post" class='navbar-form'>
+                            <div class='input-group'>
+                                <input type="text" name="new_cuisine" class='form-control' placeholder='New Cuisine...' required>
+                                <span class="input-group-btn">
+                                    <button type="submit" class='btn btn-primary'>+</button>
+                                </span>
+                            </div>
+                        </form></li>
                       </ul>
                     </li>
                   </ul>
@@ -85,7 +92,7 @@
                         </div>
                         <div class='form-group'>
                             <label for="description">Comments</label>
-                            <input type="text" name="description" class='form-control'>
+                            <textarea rows='4' type="text" name="description" class='form-control'></textarea>
                         </div>
                         <button type="submit" class='btn btn-primary'>Submit Review</button>
                     </form>
