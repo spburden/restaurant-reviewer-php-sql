@@ -33,3 +33,7 @@ li {
 .img-main {
     width: 300px;
 }
+
+#restaurantInfo {
+    text-align: center;
+}
