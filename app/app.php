@@ -106,5 +106,10 @@
         return $app['twig']->render('restaurant.html.twig', array('restaurant' => $restaurant, 'cuisine' => $cuisine, 'reviews' => $reviews));
     });
 
+    $app->post("/search_results", function() use ($app) {
+        $matches = Restaurant::searchByName($_POST['search_term']);
+        return $app['twig']->render('search_results.html.twig', array ('restaurants' => $matches));
+    });
+
     return $app;
 ?>

@@ -3,15 +3,15 @@
     <body>
         <div class='container'>
             <h1>Restaurant Reviewer</h1>
-
-            <form class="" action="/" method="post">
-                <label for="">Add a new Cuisine</label>
-                <input type="text" name="new_cuisine" required>
-                <button type="submit" name="button">Add</button>
+            <form class="" action="/search_results" method="post">
+                <h3>Search for a restaurant</h3>
+                <input type="text" name="search_term">
+                <button type="submit">Search</button>
             </form>
+
             <div class="result">
                 {% if cuisines %}
-                    <h2> Select a Cuisine</h2>
+                    <h3> Select a Cuisine</h3>
                     <ul>
                         {% for cuisine in cuisines %}
                             <a href="/cuisine/{{ cuisine.getId }}"><li> {{ cuisine.getName }} </li></a>
@@ -19,6 +19,11 @@
                     </ul>
                 {% endif %}
             </div>
+            <form class="" action="/" method="post">
+                <label for="">Add a new Cuisine</label>
+                <input type="text" name="new_cuisine" required>
+                <button type="submit" name="button">Add</button>
+            </form>
         </div>
     </body>
 </html>

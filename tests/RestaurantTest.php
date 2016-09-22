@@ -150,6 +150,30 @@
             $this->assertEquals(8.1, $output);
         }
 
+        function test_searchByName()
+        {
+            //Arrange
+            $name1 = "Zaytoon";
+            $address1 = "Santa Barbara";
+            $phone1 = "805-398-2323";
+            $cuisine_id = 12;
+            $test_Restaurant1 = new Restaurant($id = null, $name1, $address1, $phone1, $cuisine_id);
+            $test_Restaurant1->save();
+
+            $name2 = "The Habit";
+            $address2 = "Santa Barbara";
+            $phone2 = "555-555-5555";
+            $cuisine_id = 12;
+            $test_Restaurant2 = new Restaurant($id = null, $name2, $address2, $phone2, $cuisine_id);
+            $test_Restaurant2->save();
+
+            //Act
+            $output = Restaurant::searchByName('toon');
+
+            //Assert
+            $this->assertEquals([$test_Restaurant1], $output);
+        }
+
 
 
 

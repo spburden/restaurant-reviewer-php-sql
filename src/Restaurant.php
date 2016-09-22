@@ -197,6 +197,18 @@
             return $reviews;
         }
 
+        static function searchByName($search_term)
+        {
+            $allRestaurants = Restaurant::getAll();
+            $matches = array();
+            foreach($allRestaurants as $restaurant) {
+                if (stripos($restaurant->getName(), $search_term) !== false) {
+                    array_push($matches, $restaurant);
+                }
+            }
+            return $matches;
+        }
+
 
 
 

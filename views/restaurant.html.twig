@@ -5,7 +5,9 @@
             <h1>Restaurant Reviewer</h1>
             <h2>{{ restaurant.getName }}</h2>
             <h4>{{ cuisine.getName }}</h4>
-            <img class='img-main' src='{{ restaurant.getPicture }}'>
+            {% if restaurant.getPicture != '' %}
+                <img class='img-main' src='{{ restaurant.getPicture }}'>
+            {% endif %}
             <p>Location: {{ restaurant.getAddress }}</p>
             <p>Phone Number: {{ restaurant.getPhone }}</p>
             {% if restaurant.getRating == 0 %}
