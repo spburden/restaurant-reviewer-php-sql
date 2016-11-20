@@ -12,7 +12,7 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost;dbname=restaurants';
+    $server = 'mysql:host=localhost:8889;dbname=restaurants';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
