@@ -19,10 +19,21 @@
     // $DB = new PDO($server, $username, $password);
 
     // PDO for Heroku
-    $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
-    $username = 'b2c3ed677d40a6';
-    $password = 'e07cbd5a';
-    $DB = new PDO($server, $username, $password);
+    // $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
+    // $username = 'b2c3ed677d40a6';
+    // $password = 'e07cbd5a';
+    // $DB = new PDO($server, $username, $password);
+
+    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $cleardb_server = $url["host"];
+    $cleardb_username = $url["user"];
+    $cleardb_password = $url["pass"];
+    $cleardb_db = substr($url["path"], 1);
+    
+    $config['db_host'] = $cleardb_server;
+    $config['db_name'] = $cleardb_db;
+    $config['db_username'] = $cleardb_username;
+    $config['db_password'] = $cleardb_password;
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
