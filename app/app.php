@@ -30,7 +30,7 @@
     $password = $url["pass"];
     $DB = substr($url["path"], 1);
 
-    $conn = new mysqli($server, $username, $password, $db);
+    $conn = new mysqli($server, $username, $password, $DB);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
