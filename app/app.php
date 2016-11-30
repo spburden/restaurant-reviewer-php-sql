@@ -12,9 +12,16 @@
 
     $app['debug'] = true;
 
-    $server = 'mysql:host=localhost:8889;dbname=restaurants';
-    $username = 'root';
-    $password = 'root';
+    //PDO MAMP
+    // $server = 'mysql:host=localhost:8889;dbname=restaurants';
+    // $username = 'root';
+    // $password = 'root';
+    // $DB = new PDO($server, $username, $password);
+
+    // PDO for Heroku
+    $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
+    $username = 'b2c3ed677d40a6';
+    $password = 'e07cbd5a';
     $DB = new PDO($server, $username, $password);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
