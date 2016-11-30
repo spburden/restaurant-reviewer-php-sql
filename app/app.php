@@ -13,10 +13,10 @@
     $app['debug'] = true;
 
     //PDO MAMP
-    // $server = 'mysql:host=localhost:8889;dbname=restaurants';
-    // $username = 'root';
-    // $password = 'root';
-    // $DB = new PDO($server, $username, $password);
+    $server = 'mysql:host=localhost:8889;dbname=restaurants';
+    $username = 'root';
+    $password = 'root';
+    $DB = new PDO($server, $username, $password);
 
     // PDO for Heroku
     // $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
@@ -24,13 +24,13 @@
     // $password = 'e07cbd5a';
     // $DB = new PDO($server, $username, $password);
 
-    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    $server = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $DB = substr($url["path"], 1);
-
-    $conn = new mysqli($server, $username, $password, $DB);
+    // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    // $server = $url["host"];
+    // $username = $url["user"];
+    // $password = $url["pass"];
+    // $DB = substr($url["path"], 1);
+    //
+    // $conn = new mysqli($server, $username, $password, $DB);
 
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
