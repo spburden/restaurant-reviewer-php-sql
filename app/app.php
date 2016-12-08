@@ -23,6 +23,11 @@
     // $username = 'b2c3ed677d40a6';
     // $password = 'e07cbd5a';
     // $DB = new PDO($server, $username, $password);
+    $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $server = 'mysql:host=' . $url["host"] . ';dbname=' . substr($url["path"], 1);
+    $username = $url["user"];
+    $password = $url["pass"];
+    $DB = new PDO($server, $username, $password);
 
     // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
     // $server = $url["host"];
