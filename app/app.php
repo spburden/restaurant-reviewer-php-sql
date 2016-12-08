@@ -13,10 +13,10 @@
     $app['debug'] = true;
 
     //PDO MAMP
-    $server = 'mysql:host=localhost:8889;dbname=restaurants';
-    $username = 'root';
-    $password = 'root';
-    $DB = new PDO($server, $username, $password);
+    // $server = 'mysql:host=localhost:8889;dbname=restaurants';
+    // $username = 'root';
+    // $password = 'root';
+    // $DB = new PDO($server, $username, $password);
 
     // PDO for Heroku
     // $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
