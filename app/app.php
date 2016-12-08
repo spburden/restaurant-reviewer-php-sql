@@ -29,14 +29,6 @@
     $password = $url["pass"];
     $DB = new PDO($server, $username, $password);
 
-    // $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-    // $server = $url["host"];
-    // $username = $url["user"];
-    // $password = $url["pass"];
-    // $DB = substr($url["path"], 1);
-    //
-    // $conn = new mysqli($server, $username, $password, $DB);
-
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views'
     ));
