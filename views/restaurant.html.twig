@@ -1,114 +1,105 @@
+{%  include 'include/head_tag.html.twig' %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link href='/css/bootstrap.css' rel='stylesheet' type='text/css'>
-    <link href='/css/styles.css' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
-    <script src='/js/jquery-3.1.0.js'></script>
-    <script src='/js/bootstrap.js'></script>
-    <script src='/js/scripts.js'></script>
-    <title>Relp 2.0</title>
-</head>
-    <body>
-        <div class='container'>
-            <nav class="navbar navbar-default">
-              <div class="container-fluid">
+<body>
+    <div class='container'>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
                 <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#restaurantNav" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a href='/'><img class='navbar-brand' src='/../img/rice.png'></a>
-                  <a class="navbar-brand" href="/"> RELP</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#restaurantNav" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href='/'><img class='navbar-brand' src='/../img/rice.png'></a>
+                    <a class="navbar-brand" href="/"> RELP</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="restaurantNav">
-                  <form action="/search_results" method="post" class="navbar-form navbar-right">
-                      <div class='form-group'>
-                          <input type="text" name="search_term" class='form-control' placeholder='Search...' required>
-                      </div>
-                      <button type="submit" class='btn btn-primary'>Search</button>
-                  </form>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">Home</a></li>
-                    <li><a href='/cuisine/{{ cuisine.getId }}'>Back</a></li>
-                    <li><a href='/restaurant/{{ restaurant.getId }}/edit'>Edit Restaurant</a></li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuisines <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          {% for cuisine in cuisines %}
-                              <li><a href="/cuisine/{{ cuisine.getId }}"> {{ cuisine.getName }}</a></li>
-                          {% endfor %}
-                        <li role="separator" class="divider"></li>
-                        <li><form action="/" method="post" class='navbar-form'>
-                            <div class='input-group'>
-                                <input type="text" name="new_cuisine" class='form-control' placeholder='New Cuisine...' required>
-                                <span class="input-group-btn">
-                                    <button type="submit" class='btn btn-primary'>+</button>
-                                </span>
-                            </div>
-                        </form></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-            <div class='row'>
-                <div class='col-md-9'>
-                    <div id='restaurantInfo'>
-                        <h2>{{ restaurant.getName }}</h2>
-                        <h4>{{ cuisine.getName }}</h4>
-                        {% if restaurant.getPicture is not empty %}
-                            <img class='img-main' src='{{ restaurant.getPicture }}'>
-                        {% endif %}
-                        <p>Location: {{ restaurant.getAddress }}</p>
-                        <p>Phone Number: {{ restaurant.getPhone }}</p>
-                        {% if restaurant.getRating == 0 %}
-                            <h3>No Ratings Yet</h3>
-                        {% else %}
-                            <h3>Rating: {{ restaurant.getRating }}</h3>
-                            <h4>Number of Reviews: {{ restaurant.getRatingCount }}</h4>
-                        {% endif %}
-                    </div>
-                    {% if reviews is not empty %}
-                        <h3>Reviews</h3>
-                        <ul>
-                            {% for review in reviews %}
-                                <li>
-                                    <div class='well'>
-                                        <h4>{{ review.getAuthor }}</h4>
-                                        <h4>{{ review.getRating }}</h4>
-                                        <p>{{ review.getDescription }}</p>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-                <div class='col-md-3'>
-                    <form class="well" action="/restaurant/{{ restaurant.getId }}/update_rating" method="post">
-                        <h3>Review {{ restaurant.getName }}</h3>
-                        <div class='form-group ui-content'>
-                            <label>Rate: <span id='sliderValue'>5</span></label>
-                            <input id='slider' type="range" name="user_rating" value="5" min="1" max="10" step=".5">
-                        </div>
+                    <form action="/search_results" method="post" class="navbar-form navbar-right">
                         <div class='form-group'>
-                            <label for="author">Name</label>
-                            <input type="text" name="author" class='form-control'>
+                            <input type="text" name="search_term" class='form-control' placeholder='Search...' required>
                         </div>
-                        <div class='form-group'>
-                            <label for="description">Comments</label>
-                            <textarea rows='4' type="text" name="description" class='form-control'></textarea>
-                        </div>
-                        <button type="submit" class='btn btn-primary'>Submit Review</button>
+                        <button type="submit" class='btn btn-primary'>Search</button>
                     </form>
-
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">Home</a></li>
+                        <li><a href='/cuisine/{{ cuisine.getId }}'>Back</a></li>
+                        <li><a href='/restaurant/{{ restaurant.getId }}/edit'>Edit Restaurant</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuisines <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% for cuisine in cuisines %}
+                                <li><a href="/cuisine/{{ cuisine.getId }}"> {{ cuisine.getName }}</a></li>
+                                {% endfor %}
+                                <li role="separator" class="divider"></li>
+                                <li><form action="/" method="post" class='navbar-form'>
+                                    <div class='input-group'>
+                                        <input type="text" name="new_cuisine" class='form-control' placeholder='New Cuisine...' required>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class='btn btn-primary'>+</button>
+                                        </span>
+                                    </div>
+                                </form></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </nav>
+        <div class='row'>
+            <div class='col-md-9'>
+                <div id='restaurantInfo'>
+                    <h2>{{ restaurant.getName }}</h2>
+                    <h4>{{ cuisine.getName }}</h4>
+                    {% if restaurant.getPicture is not empty %}
+                    <img class='img-main' src='{{ restaurant.getPicture }}'>
+                    {% endif %}
+                    <p>Location: {{ restaurant.getAddress }}</p>
+                    <p>Phone Number: {{ restaurant.getPhone }}</p>
+                    {% if restaurant.getRating == 0 %}
+                    <h3>No Ratings Yet</h3>
+                    {% else %}
+                    <h3>Rating: {{ restaurant.getRating }}</h3>
+                    <h4>Number of Reviews: {{ restaurant.getRatingCount }}</h4>
+                    {% endif %}
+                </div>
+                {% if reviews is not empty %}
+                <h3>Reviews</h3>
+                <ul>
+                    {% for review in reviews %}
+                    <li>
+                        <div class='well'>
+                            <h4>{{ review.getAuthor }}</h4>
+                            <h4>{{ review.getRating }}</h4>
+                            <p>{{ review.getDescription }}</p>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class='col-md-3'>
+                <form class="well" action="/restaurant/{{ restaurant.getId }}/update_rating" method="post">
+                    <h3>Review {{ restaurant.getName }}</h3>
+                    <div class='form-group ui-content'>
+                        <label>Rate: <span id='sliderValue'>5</span></label>
+                        <input id='slider' type="range" name="user_rating" value="5" min="1" max="10" step=".5">
+                    </div>
+                    <div class='form-group'>
+                        <label for="author">Name</label>
+                        <input type="text" name="author" class='form-control'>
+                    </div>
+                    <div class='form-group'>
+                        <label for="description">Comments</label>
+                        <textarea rows='4' type="text" name="description" class='form-control'></textarea>
+                    </div>
+                    <button type="submit" class='btn btn-primary'>Submit Review</button>
+                </form>
+
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

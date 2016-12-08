@@ -4,6 +4,8 @@
 
 #### By _**Stephen Burden**_
 
+[Click here to view live](https://enigmatic-tor-27207.herokuapp.com/)
+
 <img src="public/assets/images/screenshot1.png" alt="a screenshot of the site">
 
 <img src="public/assets/images/screenshot2.png" alt="a screenshot of the site">

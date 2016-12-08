@@ -1,116 +1,107 @@
+{%  include 'include/head_tag.html.twig' %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link href='/css/bootstrap.css' rel='stylesheet' type='text/css'>
-    <link href='/css/styles.css' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
-    <script src='/js/jquery-3.1.0.js'></script>
-    <script src='/js/bootstrap.js'></script>
-    <script src='/js/scripts.js'></script>
-    <title>Relp 2.0</title>
-</head>
-    <body>
-        <div class='container'>
-            <nav class="navbar navbar-default">
-              <div class="container-fluid">
+<body>
+    <div class='container'>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
                 <div class="navbar-header">
-                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#homeNav" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a href='/'><img class='navbar-brand' src='../img/rice.png'></a>
-                  <a class="navbar-brand" href="/"> RELP</a>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#homeNav" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href='/'><img class='navbar-brand' src='../img/rice.png'></a>
+                    <a class="navbar-brand" href="/"> RELP</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="homeNav">
-                  <form action="/search_results" method="post" class="navbar-form navbar-right">
-                      <div class='form-group'>
-                          <input type="text" name="search_term" class='form-control' placeholder='Search...' required>
-                      </div>
-                      <button type="submit" class='btn btn-primary'>Search</button>
-                  </form>
-                  <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuisines <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                          {% for cuisine in cuisines %}
-                              <li><a href="/cuisine/{{ cuisine.getId }}"> {{ cuisine.getName }}</a></li>
-                          {% endfor %}
-                        <li role="separator" class="divider"></li>
-                        <li><form action="/" method="post" class='navbar-form'>
-                            <div class='input-group'>
-                                <input type="text" name="new_cuisine" class='form-control' placeholder='New Cuisine...' required>
-                                <span class="input-group-btn">
-                                    <button type="submit" class='btn btn-primary'>+</button>
-                                </span>
-                            </div>
-                        </form></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-            <div class='jumbotron'>
-                <div class='title'>
-                    <h1>WELCOME TO RELP</h1>
-                    <h3>Get started by choosing an option below</h3>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-md-4'>
-                    <form action="/search_results" method="post" class='form-inline'>
-                        <h3>Search for a restaurant</h3>
+                    <form action="/search_results" method="post" class="navbar-form navbar-right">
                         <div class='form-group'>
                             <input type="text" name="search_term" class='form-control' placeholder='Search...' required>
                         </div>
                         <button type="submit" class='btn btn-primary'>Search</button>
                     </form>
-                </div>
-                <div class='col-md-4'>
-                    <div class="result">
-                        {% if cuisines %}
-                            <h3> Select a Cuisine</h3>
-                            <ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuisines <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
                                 {% for cuisine in cuisines %}
-                                    <a href="/cuisine/{{ cuisine.getId }}"><li> {{ cuisine.getName }} </li></a>
+                                <li><a href="/cuisine/{{ cuisine.getId }}"> {{ cuisine.getName }}</a></li>
                                 {% endfor %}
+                                <li role="separator" class="divider"></li>
+                                <li><form action="/" method="post" class='navbar-form'>
+                                    <div class='input-group'>
+                                        <input type="text" name="new_cuisine" class='form-control' placeholder='New Cuisine...' required>
+                                        <span class="input-group-btn">
+                                            <button type="submit" class='btn btn-primary'>+</button>
+                                        </span>
+                                    </div>
+                                </form></li>
                             </ul>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class='col-md-4'>
-                    <form action="/" method="post" class='form-inline '>
-                        <h3>Add a new Cuisine</h3>
-                        <div class='form-group'>
-                            <input type="text" name="new_cuisine" class='form-control' placeholder='Cuisine...' required>
-                        </div>
-                        <button type="submit" class='btn btn-primary'>Add</button>
-                    </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class='row'>
-                <div class='col-md-6'>
-                    <h3 class='text-center'>Top 10</h3>
-                    <ul class='topTen'>
+        </nav>
+        <div class='jumbotron'>
+            <div class='title'>
+                <h1>WELCOME TO RELP</h1>
+                <h3>Get started by choosing an option below</h3>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-4'>
+                <form action="/search_results" method="post" class='form-inline'>
+                    <h3>Search for a restaurant</h3>
+                    <div class='form-group'>
+                        <input type="text" name="search_term" class='form-control' placeholder='Search...' required>
+                    </div>
+                    <button type="submit" class='btn btn-primary'>Search</button>
+                </form>
+            </div>
+            <div class='col-md-4'>
+                <div class="result">
+                    {% if cuisines %}
+                    <h3> Select a Cuisine</h3>
+                    <ul>
+                        {% for cuisine in cuisines %}
+                        <a href="/cuisine/{{ cuisine.getId }}"><li> {{ cuisine.getName }} </li></a>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div class='col-md-4'>
+                <form action="/" method="post" class='form-inline '>
+                    <h3>Add a new Cuisine</h3>
+                    <div class='form-group'>
+                        <input type="text" name="new_cuisine" class='form-control' placeholder='Cuisine...' required>
+                    </div>
+                    <button type="submit" class='btn btn-primary'>Add</button>
+                </form>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-6'>
+                <h3 class='text-center'>Top 10</h3>
+                <ul class='topTen'>
                     {% for restaurant in top_ten %}
-                        <a href="/restaurant/{{ restaurant.getId }}"><li>{{ restaurant.getRating }} - {{ restaurant.getName }} <span class='pull-right'>({{ restaurant.getRatingCount }}
-                            {% if restaurant.getRatingCount == 1 %}review{% else %}reviews{% endif %})</span></li></a>
-                    {% endfor %}
+                    <a href="/restaurant/{{ restaurant.getId }}"><li>{{ restaurant.getRating }} - {{ restaurant.getName }} <span class='pull-right'>({{ restaurant.getRatingCount }}
+                        {% if restaurant.getRatingCount == 1 %}review{% else %}reviews{% endif %})</span></li></a>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class='col-md-6'>
                     <h3 class='text-center'>Most Reviewed</h3>
                     <ul class='topTen'>
-                    {% for restaurant in most_popular %}
+                        {% for restaurant in most_popular %}
                         <a href="/restaurant/{{ restaurant.getId }}"><li>{{ restaurant.getRatingCount }} - {{ restaurant.getName }} <span class='pull-right'>({{ restaurant.getRating }}/10)</span></li></a>
-                    {% endfor %}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
     </body>
-</html>
+    </html>
