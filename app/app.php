@@ -19,10 +19,6 @@
     // $DB = new PDO($server, $username, $password);
 
     // PDO for Heroku
-    // $server = 'mysql:host=us-cdbr-iron-east-04.cleardb.net;dbname=heroku_ff98c640c4089ab';
-    // $username = 'b2c3ed677d40a6';
-    // $password = 'e07cbd5a';
-    // $DB = new PDO($server, $username, $password);
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
     $server = 'mysql:host=' . $url["host"] . ';dbname=' . substr($url["path"], 1);
     $username = $url["user"];
